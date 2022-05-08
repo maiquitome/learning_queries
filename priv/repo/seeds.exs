@@ -28,6 +28,11 @@ _mike_tyson =
   |> User.changeset(%{first_name: "Mike", last_name: "Tyson"})
   |> Repo.insert!()
 
+mike =
+  %User{}
+  |> User.changeset(%{first_name: "Mike", last_name: ""})
+  |> Repo.insert!()
+
 ##########################
 ###### POSTS
 ##########################
@@ -55,6 +60,15 @@ mike_mago_single_post =
     title: "Único Post do Mike Mago",
     body: "Olá, esse é o único post do Mike Mago...",
     user_id: mike_mago.id
+  })
+  |> Repo.insert!()
+
+_mike_post =
+  %Post{}
+  |> Post.changeset(%{
+    title: "Único Post do Mike",
+    body: "Olá, esse é o único post do Mike...",
+    user_id: mike.id
   })
   |> Repo.insert!()
 
