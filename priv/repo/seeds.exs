@@ -72,6 +72,14 @@ _mike_post =
   })
   |> Repo.insert!()
 
+_no_user_post =
+  %Post{}
+  |> Post.changeset(%{
+    title: "Único Post sem usuário",
+    body: "Olá, esse é o único post sem usuário..."
+  })
+  |> Repo.insert!()
+
 ##########################
 ###### COMMENTS
 ##########################
