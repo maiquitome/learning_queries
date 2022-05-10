@@ -6,6 +6,8 @@ defmodule MyBlog.User do
     field :first_name, :string
     field :last_name, :string
 
+    has_many :posts, MyBlog.Post
+
     timestamps()
   end
 

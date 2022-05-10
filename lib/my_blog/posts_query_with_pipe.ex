@@ -4,8 +4,16 @@ defmodule MyBlog.PostsQueryWithPipe do
   alias MyBlog.{Post, Repo, User}
 
   def find_all_with_user_only() do
-    Post
-    |> join(:inner, [p], u in User, on: p.user_id == u.id)
+    # Post
+    # |> join(:inner, [p], u in User, on: p.user_id == u.id)
+    # |> Repo.all()
+
+    # Post
+    # |> join(:inner, [p], u in assoc(p, :user))
+    # |> Repo.all()
+
+    User
+    |> join(:inner, [u], p in assoc(u, :posts))
     |> Repo.all()
   end
 

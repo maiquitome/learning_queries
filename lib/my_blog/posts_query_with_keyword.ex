@@ -6,11 +6,21 @@ defmodule MyBlog.PostsQueryWithKeyword do
   def find_all_with_user_only() do
     # DICA: inner_join == join
 
-    from(p in Post, inner_join: u in User, on: p.user_id == u.id)
-    |> Repo.all()
+    # from(p in Post, inner_join: u in User, on: p.user_id == u.id)
+    # |> Repo.all()
 
     # from(p in Post,
     #   join: u in User, on: p.user_id == u.id
+    # )
+    # |> Repo.all()
+
+    from(p in Post,
+      join: u in assoc(p, :user)
+    )
+    |> Repo.all()
+
+    # from(u in User,
+    #   join: p in assoc(u, :posts)
     # )
     # |> Repo.all()
   end
