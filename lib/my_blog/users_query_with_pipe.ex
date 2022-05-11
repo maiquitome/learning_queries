@@ -23,4 +23,10 @@ defmodule MyBlog.UsersQueryWithPipe do
     |> select([u], %{first_name: u.first_name, last_name: u.last_name})
     |> Repo.all()
   end
+
+  def find_all_and_if_null_replaces() do
+    MyBlog.User
+    |> select([u], fragment("coalesce(?, ?)", u.last_name, "não cadastrado"))
+    |> Repo.all()
+  end
 end

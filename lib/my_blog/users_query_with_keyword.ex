@@ -29,4 +29,11 @@ defmodule MyBlog.UsersQueryWithKeyword do
     )
     |> Repo.all()
   end
+
+  def find_all_and_if_null_replaces() do
+    from(u in MyBlog.User,
+      select: fragment("coalesce(?, ?)", u.last_name, "não cadastrado")
+    )
+    |> Repo.all()
+  end
 end
