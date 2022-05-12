@@ -1,7 +1,7 @@
 defmodule MyBlog.CommentsQueryWithKeyword do
   import Ecto.Query
 
-  alias MyBlog.{Post, Repo}
+  alias MyBlog.{Post, Repo, Comment}
 
   def find_all_posts_with_comments() do
     # O exemplo abaixo buscará todas as postagens do banco de dados e, em seguida,
@@ -12,11 +12,14 @@ defmodule MyBlog.CommentsQueryWithKeyword do
 
     # Muitas vezes, você pode querer que postagens e comentários sejam selecionados e filtrados na mesma consulta.
     # Para esses casos, você pode dizer explicitamente que uma junção existente seja pré-carregada no conjunto de resultados:
+
+    comments_query = from c in Comment, select: c.body
+
     Repo.all(
       from p in Post,
         distinct: true,
         join: c in assoc(p, :comments),
-        preload: [comments: c]
+        preload: [comments: ^comments_query]
     )
   end
 
