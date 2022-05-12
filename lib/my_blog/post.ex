@@ -8,6 +8,7 @@ defmodule MyBlog.Post do
     # field :user_id, :id
 
     belongs_to :user, MyBlog.User
+    has_many :comments, MyBlog.Comment
 
     timestamps()
   end

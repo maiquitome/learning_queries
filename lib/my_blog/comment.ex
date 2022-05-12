@@ -4,7 +4,9 @@ defmodule MyBlog.Comment do
 
   schema "comments" do
     field :body, :string
-    field :post_id, :id
+    # field :post_id, :id
+
+    belongs_to :post, MyBlog.Post
 
     timestamps()
   end
